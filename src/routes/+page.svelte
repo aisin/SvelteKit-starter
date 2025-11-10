@@ -1,7 +1,6 @@
 <script>
 	import { authClient } from '../lib/auth-client';
 	let { data } = $props();
-	$inspect(data);
 </script>
 
 <div class="flex min-h-screen flex-col items-center justify-center gap-2">

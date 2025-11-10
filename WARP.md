@@ -21,16 +21,17 @@ This file provides guidance to WARP (warp.dev) when working with code in this re
   - Format (Prettier write): npm run format
 
 ### Tests
+
 - Run all unit tests (Vitest workspaces: client=jsdom for Svelte, server=node)
-  - npm run test:unit           # watch mode
-  - npm run test:unit -- --run  # run once (CI-style)
+  - npm run test:unit # watch mode
+  - npm run test:unit -- --run # run once (CI-style)
 - Run a single unit test file
   - npm run test:unit -- src/routes/page.svelte.test.ts
 - Filter by test name
   - npm run test:unit -- src/routes/page.svelte.test.ts -t "should render h1"
 - Run only the client or server Vitest workspace
   - Client (Svelte + jsdom): npm run test:unit -- --project client
-  - Server (Node):           npm run test:unit -- --project server
+  - Server (Node): npm run test:unit -- --project server
 
 - End-to-end tests (Playwright; server auto-built via config)
   - All: npm run test:e2e
@@ -38,12 +39,14 @@ This file provides guidance to WARP (warp.dev) when working with code in this re
   - By title: npm run test:e2e -- -g "home page has expected h1"
 
 ### Database (PostgreSQL via Docker + Drizzle)
+
 - Start DB (docker compose up): npm run db:start
 - Apply schema (Drizzle Kit push): npm run db:push
 - Run generated migrations: npm run db:migrate
 - Open Drizzle Studio: npm run db:studio
 
 Environment required for DB/Drizzle commands (see .env.example):
+
 - DATABASE_URL must be set (e.g. postgres://root:mysecretpassword@localhost:5432/local)
 
 ## Architecture overview
@@ -64,7 +67,7 @@ Environment required for DB/Drizzle commands (see .env.example):
     - /dashboard is protected and requires an active session
 - Authentication
   - better-auth is configured in src/lib/auth.ts with the Drizzle adapter. Social providers: GitHub and Google; secrets loaded from process.env (dotenv/config is imported there for dev).
-  - SvelteKit integration via src/hooks.server.ts using svelteKitHandler({ event, resolve, auth }). This wires up the better-auth routes (e.g. /api/auth/*) and session handling on the server.
+  - SvelteKit integration via src/hooks.server.ts using svelteKitHandler({ event, resolve, auth }). This wires up the better-auth routes (e.g. /api/auth/\*) and session handling on the server.
   - Client helpers in src/lib/auth-client.ts expose createAuthClient(), signOut(), and useSession().
 - Data layer
   - Drizzle ORM with postgres-js client. Connection configured in src/lib/server/db/index.ts using $env/dynamic/private.DATABASE_URL.
@@ -84,6 +87,7 @@ Environment required for DB/Drizzle commands (see .env.example):
   - .env.example documents required variables for auth and DB.
 
 ## Notes for future agents
+
 - Default package manager: npm (package-lock.json is present). README also documents Bun usage; commands above provide npm first with Bun alternatives where relevant.
 - For DB/Drizzle commands, ensure DATABASE_URL is present in the shell environment or a .env file at repo root. docker-compose.yml spins up a local Postgres compatible with .env.example.
 - Auth callbacks must match your BETTER_AUTH_URL (see .env.example) and your provider dashboard settings. The app expects the default development origin http://localhost:5173.
