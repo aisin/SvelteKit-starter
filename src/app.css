@@ -1,8 +1,10 @@
 @import 'tailwindcss';
+@plugin "tailwindcss-animate";
 
 @import '@skeletonlabs/skeleton';
 @import '@skeletonlabs/skeleton/themes/modern';
 
 @source '../node_modules/@skeletonlabs/skeleton-svelte/dist';
 
+/* Keep the dark variant used by LightSwitch */
 @custom-variant dark (&:where([data-mode="dark"], [data-mode="dark"] *));

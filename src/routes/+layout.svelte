@@ -1,4 +1,5 @@
 <script lang="ts">
+	import '../theme.css';
 	import '../app.css';
 	import LightSwitch from './components/LightSwitch.svelte';
 
