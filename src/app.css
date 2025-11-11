@@ -1,18 +1,5 @@
 @import 'tailwindcss';
 @plugin "tailwindcss-animate";
 
-@import '@skeletonlabs/skeleton';
-@import '@skeletonlabs/skeleton/themes/modern';
-
-@source '../node_modules/@skeletonlabs/skeleton-svelte/dist';
-
-/* Keep the dark variant used by LightSwitch */
+/* Custom dark variant for LightSwitch */
 @custom-variant dark (&:where([data-mode="dark"], [data-mode="dark"] *));
-
-/* Override Skeleton body background variables */
-:root {
-  --body-background-color: oklch(1 0 0);
-}
-[data-mode="dark"] {
-  --body-background-color-dark: oklch(0.141 0.005 285.823);
-}
