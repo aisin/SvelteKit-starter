@@ -4,6 +4,7 @@
 	import NavigationMenuItem from '$lib/components/ui/NavigationMenuItem.svelte';
 	import Icon from '$lib/components/ui/Icon.svelte';
 	import Button from '$lib/components/ui/Button.svelte';
+	import LightSwitch from '../../../routes/components/LightSwitch.svelte';
 	import { cn } from '$lib/utils/cn';
 
 	let { class: className = '' } = $props();
@@ -31,6 +32,7 @@
 
 		<!-- Right: actions -->
 		<div class="hidden items-center gap-2 md:flex">
+			<LightSwitch />
 			<Button variant="ghost">Sign in</Button>
 			<Button>Get started</Button>
 		</div>
@@ -61,6 +63,9 @@
 					<Link href="/pricing" class="py-2">Pricing</Link>
 					<Link href="/docs" class="py-2">Docs</Link>
 					<Link href="/blog" class="py-2">Blog</Link>
+					<div class="mt-2 flex items-center gap-2">
+						<LightSwitch />
+					</div>
 					<div class="mt-2 flex gap-2">
 						<Button variant="ghost" class="flex-1">Sign in</Button>
 						<Button class="flex-1">Get started</Button>

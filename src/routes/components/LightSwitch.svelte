@@ -1,5 +1,5 @@
 <script lang="ts">
-	import { Switch } from '@skeletonlabs/skeleton-svelte';
+	import { Sun, Moon } from '@lucide/svelte';
 
 	let checked = $state(false);
 
@@ -8,11 +8,11 @@
 		checked = mode === 'dark';
 	});
 
-	const onCheckedChange = (event: { checked: boolean }) => {
-		const mode = event.checked ? 'dark' : 'light';
+	const toggle = () => {
+		checked = !checked;
+		const mode = checked ? 'dark' : 'light';
 		document.documentElement.setAttribute('data-mode', mode);
 		localStorage.setItem('mode', mode);
-		checked = event.checked;
 	};
 </script>
 
@@ -23,4 +23,15 @@
 	</script>
 </svelte:head>
 
-<Switch {checked} {onCheckedChange}></Switch>
+<button
+	type="button"
+	onclick={toggle}
+	class="inline-flex h-9 w-9 items-center justify-center rounded-md text-foreground transition-colors hover:bg-accent hover:text-accent-foreground focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-ring focus-visible:ring-offset-2"
+	aria-label={checked ? 'Switch to light mode' : 'Switch to dark mode'}
+>
+	{#if checked}
+		<Moon class="h-5 w-5" />
+	{:else}
+		<Sun class="h-5 w-5" />
+	{/if}
+</button>
