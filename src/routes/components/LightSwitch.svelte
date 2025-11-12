@@ -4,22 +4,29 @@
 	let checked = $state(false);
 
 	$effect(() => {
-		const mode = localStorage.getItem('mode') || 'light';
-		checked = mode === 'dark';
+		const isDarkMode = document.documentElement.classList.contains('dark');
+		checked = isDarkMode;
 	});
 
 	const toggle = () => {
 		checked = !checked;
-		const mode = checked ? 'dark' : 'light';
-		document.documentElement.setAttribute('data-mode', mode);
-		localStorage.setItem('mode', mode);
+		if (checked) {
+			document.documentElement.classList.add('dark');
+			localStorage.setItem('theme', 'dark');
+		} else {
+			document.documentElement.classList.remove('dark');
+			localStorage.setItem('theme', 'light');
+		}
 	};
 </script>
 
 <svelte:head>
 	<script>
-		const mode = localStorage.getItem('mode') || 'light';
-		document.documentElement.setAttribute('data-mode', mode);
+		if (localStorage.getItem('theme') === 'dark' || (!('theme' in localStorage) && window.matchMedia('(prefers-color-scheme: dark)').matches)) {
+			document.documentElement.classList.add('dark');
+		} else {
+			document.documentElement.classList.remove('dark');
+		}
 	</script>
 </svelte:head>
 
