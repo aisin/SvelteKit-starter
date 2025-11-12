@@ -1,9 +1,6 @@
 @import 'tailwindcss';
 @plugin "tailwindcss-animate";
 
-/* Tailwind v4 dark mode configuration */
-@variant dark (.dark &);
-
 /* shadcn-svelte theme tokens (Style: Default, Base color: Orange) */
 :root {
 	--background: 0 0% 100%;
@@ -96,3 +93,6 @@
 	--radius-md: calc(var(--radius) - 2px);
 	--radius-sm: calc(var(--radius) - 4px);
 }
+
+/* Tailwind v4 dark mode configuration - Must be after @theme */
+@variant dark (.dark &);

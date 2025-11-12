@@ -7,6 +7,13 @@
 		<script>
 			// Initialize theme before page renders to prevent flash
 			(function() {
+				// Migrate from old 'mode' key to new 'theme' key
+				const oldMode = localStorage.getItem('mode');
+				if (oldMode && !localStorage.getItem('theme')) {
+					localStorage.setItem('theme', oldMode);
+					localStorage.removeItem('mode');
+				}
+
 				const theme = localStorage.getItem('theme');
 				const prefersDark = window.matchMedia('(prefers-color-scheme: dark)').matches;
 
