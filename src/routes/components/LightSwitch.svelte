@@ -1,11 +1,13 @@
 <script lang="ts">
 	import { Sun, Moon } from '@lucide/svelte';
+	import { onMount } from 'svelte';
 
 	let checked = $state(false);
 
-	$effect(() => {
-		const isDarkMode = document.documentElement.classList.contains('dark');
-		checked = isDarkMode;
+	// Initialize theme state on mount
+	onMount(() => {
+		// Check if dark mode is already applied by the script in app.html
+		checked = document.documentElement.classList.contains('dark');
 	});
 
 	const toggle = () => {
@@ -19,16 +21,6 @@
 		}
 	};
 </script>
-
-<svelte:head>
-	<script>
-		if (localStorage.getItem('theme') === 'dark' || (!('theme' in localStorage) && window.matchMedia('(prefers-color-scheme: dark)').matches)) {
-			document.documentElement.classList.add('dark');
-		} else {
-			document.documentElement.classList.remove('dark');
-		}
-	</script>
-</svelte:head>
 
 <button
 	type="button"
