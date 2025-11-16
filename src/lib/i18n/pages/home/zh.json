@@ -1,0 +1,19 @@
+{
+  "header": {
+    "title": "工具集合",
+    "subtitle": "为 SvelteKit 与 BetterAuth 精心打造的起步项目",
+    "description": "探索我们的实用工具与示例功能。",
+    "primary_cta": {
+      "title": "开始使用",
+      "url": "/login",
+      "target": "_self",
+      "variant": "default"
+    },
+    "secondary_cta": {
+      "title": "查看控制台",
+      "url": "/dashboard",
+      "target": "_self",
+      "variant": "ghost"
+    }
+  }
+}

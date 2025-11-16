@@ -1,0 +1,37 @@
+{
+  "brand": {
+    "title": "Acme",
+    "logo": {
+      "src": "/logo.svg",
+      "alt": "Acme logo"
+    }
+  },
+  "nav": {
+    "items": [
+      { "title": "Home", "url": "/", "icon": "home" },
+      { "title": "Features", "url": "/features", "icon": "sparkles" },
+      { "title": "Pricing", "url": "/pricing", "icon": "badge-dollar-sign" },
+      { "title": "Docs", "url": "/docs", "icon": "book-open" },
+      { "title": "Blog", "url": "/blog", "icon": "newspaper" }
+    ]
+  },
+  "buttons": [
+    {
+      "title": "Sign in",
+      "url": "/login",
+      "target": "_self",
+      "variant": "ghost",
+      "icon": "log-in"
+    },
+    {
+      "title": "Get started",
+      "url": "/login",
+      "target": "_self",
+      "variant": "default",
+      "icon": "rocket"
+    }
+  ],
+  "show_sign": true,
+  "show_theme": true,
+  "show_locale": true
+}

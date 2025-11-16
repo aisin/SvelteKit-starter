@@ -5,9 +5,15 @@
 	import Icon from '$lib/components/ui/Icon.svelte';
 	import Button from '$lib/components/ui/Button.svelte';
 	import LightSwitch from '../../../routes/components/LightSwitch.svelte';
+	import LocaleToggle from '$lib/components/LocaleToggle.svelte';
+	import { localeHref } from '$lib/i18n/link';
+	import { getI18nContext } from '$lib/i18n/context';
+	import { page } from '$app/stores';
 	import { cn } from '$lib/utils/cn';
 
 	let { class: className = '' } = $props();
+	const { t } = getI18nContext();
+	const locale = $derived((($page.params.lang as string | undefined) ?? 'en').toLowerCase());
 	let mobileOpen = $state(false);
 </script>
 
@@ -15,26 +21,34 @@
 	<div class="mx-auto flex max-w-screen-xl items-center justify-between px-4 py-3 md:px-6">
 		<!-- Left: logo -->
 		<div class="flex items-center gap-2">
-			<Link href="/" class="flex items-center gap-2 text-foreground">
+			<Link href={localeHref('/', locale)} class="flex items-center gap-2 text-foreground">
 				<Icon name="rocket" class="text-primary" />
-				<span class="text-base font-semibold">Acme</span>
+				<span class="text-base font-semibold">{t('header.brand.title') ?? 'Acme'}</span>
 			</Link>
 		</div>
 
 		<!-- Center: nav (desktop) -->
 		<NavigationMenu class="ml-6">
-<NavigationMenuItem href="/" label="Home" active />
-			<NavigationMenuItem href="/features" label="Features" />
-			<NavigationMenuItem href="/pricing" label="Pricing" />
-			<NavigationMenuItem href="/docs" label="Docs" />
-			<NavigationMenuItem href="/blog" label="Blog" />
+			{#each (t('header.nav.items') as unknown as any[] ?? []) as item, i}
+				<NavigationMenuItem href={localeHref(item.url, locale)} label={item.title} active={i === 0} />
+			{/each}
 		</NavigationMenu>
 
 		<!-- Right: actions -->
 		<div class="hidden items-center gap-2 md:flex">
-			<LightSwitch />
-			<Button variant="ghost">Sign in</Button>
-			<Button>Get started</Button>
+			{#if t('header.show_theme')}
+				<LightSwitch />
+			{/if}
+			{#if t('header.show_locale')}
+				<LocaleToggle />
+			{/if}
+			{#if t('header.show_sign')}
+				{#each (t('header.buttons') as unknown as any[] ?? []) as button}
+					<Link href={localeHref(button.url, locale)} target={button.target}>
+						<Button variant={button.variant}>{button.title}</Button>
+					</Link>
+				{/each}
+			{/if}
 		</div>
 
 		<!-- Mobile menu toggle -->
@@ -58,17 +72,25 @@
 		<div class="border-t bg-background md:hidden">
 			<div class="mx-auto max-w-screen-xl px-4 py-3">
 				<nav class="grid gap-1">
-					<Link href="/" class="py-2">Home</Link>
-					<Link href="/features" class="py-2">Features</Link>
-					<Link href="/pricing" class="py-2">Pricing</Link>
-					<Link href="/docs" class="py-2">Docs</Link>
-					<Link href="/blog" class="py-2">Blog</Link>
+					{#each (t('header.nav.items') as unknown as any[] ?? []) as item}
+						<Link href={localeHref(item.url, locale)} class="py-2">{item.title}</Link>
+					{/each}
 					<div class="mt-2 flex items-center gap-2">
-						<LightSwitch />
+						{#if t('header.show_theme')}
+							<LightSwitch />
+						{/if}
+						{#if t('header.show_locale')}
+							<LocaleToggle />
+						{/if}
 					</div>
 					<div class="mt-2 flex gap-2">
-						<Button variant="ghost" class="flex-1">Sign in</Button>
-						<Button class="flex-1">Get started</Button>
+						{#if t('header.show_sign')}
+							{#each (t('header.buttons') as unknown as any[] ?? []) as button}
+								<Link href={localeHref(button.url, locale)} class="flex-1" target={button.target}>
+									<Button variant={button.variant} class="w-full">{button.title}</Button>
+								</Link>
+							{/each}
+						{/if}
 					</div>
 				</nav>
 			</div>

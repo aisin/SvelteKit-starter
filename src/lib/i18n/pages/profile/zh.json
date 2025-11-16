@@ -1,0 +1,11 @@
+{
+  "header": {
+    "title": "个人资料",
+    "subtitle": "欢迎使用 SvelteKit Betterauth Starter",
+    "description": "查看当前会话中保存的用户信息。"
+  },
+  "session": {
+    "signed_in_as": "你已登录，{name}",
+    "sign_out": "退出登录"
+  }
+}

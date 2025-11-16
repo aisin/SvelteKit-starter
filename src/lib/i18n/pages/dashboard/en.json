@@ -1,0 +1,10 @@
+{
+  "header": {
+    "title": "Welcome, {name}",
+    "subtitle": "Your dashboard",
+    "description": "View your session information and navigate through the app."
+  },
+  "actions": {
+    "sign_out": "Sign Out"
+  }
+}

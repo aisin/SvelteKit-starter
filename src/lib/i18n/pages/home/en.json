@@ -1,0 +1,19 @@
+{
+  "header": {
+    "title": "Tools Collection",
+    "subtitle": "A curated starter for SvelteKit and BetterAuth",
+    "description": "Explore our collection of useful tools and starter features.",
+    "primary_cta": {
+      "title": "Get started",
+      "url": "/login",
+      "target": "_self",
+      "variant": "default"
+    },
+    "secondary_cta": {
+      "title": "View dashboard",
+      "url": "/dashboard",
+      "target": "_self",
+      "variant": "ghost"
+    }
+  }
+}

@@ -1,0 +1,15 @@
+{
+  "header": {
+    "title": "Sign in",
+    "subtitle": "Choose a provider to continue",
+    "description": "Sign in with Google or GitHub to access your dashboard."
+  },
+  "providers": {
+    "google": {
+      "label": "Continue with Google"
+    },
+    "github": {
+      "label": "Continue with GitHub"
+    }
+  }
+}

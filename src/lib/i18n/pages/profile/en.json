@@ -1,0 +1,11 @@
+{
+  "header": {
+    "title": "Profile",
+    "subtitle": "Welcome to SvelteKit Betterauth Starter",
+    "description": "Inspect the data we have for your current session."
+  },
+  "session": {
+    "signed_in_as": "You have signed in, {name}",
+    "sign_out": "Sign Out"
+  }
+}

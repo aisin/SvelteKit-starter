@@ -1,0 +1,10 @@
+{
+  "header": {
+    "title": "欢迎你，{name}",
+    "subtitle": "你的控制台",
+    "description": "查看会话信息并在应用中导航。"
+  },
+  "actions": {
+    "sign_out": "退出登录"
+  }
+}

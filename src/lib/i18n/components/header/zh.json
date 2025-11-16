@@ -1,0 +1,37 @@
+{
+  "brand": {
+    "title": "Acme",
+    "logo": {
+      "src": "/logo.svg",
+      "alt": "Acme 标志"
+    }
+  },
+  "nav": {
+    "items": [
+      { "title": "首页", "url": "/", "icon": "home" },
+      { "title": "特性", "url": "/features", "icon": "sparkles" },
+      { "title": "定价", "url": "/pricing", "icon": "badge-dollar-sign" },
+      { "title": "文档", "url": "/docs", "icon": "book-open" },
+      { "title": "博客", "url": "/blog", "icon": "newspaper" }
+    ]
+  },
+  "buttons": [
+    {
+      "title": "登录",
+      "url": "/login",
+      "target": "_self",
+      "variant": "ghost",
+      "icon": "log-in"
+    },
+    {
+      "title": "开始使用",
+      "url": "/login",
+      "target": "_self",
+      "variant": "default",
+      "icon": "rocket"
+    }
+  ],
+  "show_sign": true,
+  "show_theme": true,
+  "show_locale": true
+}
