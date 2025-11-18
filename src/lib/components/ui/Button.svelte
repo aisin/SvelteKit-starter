@@ -31,16 +31,24 @@
 
 	type ButtonVariants = VariantProps<typeof buttonVariants>;
 
+	// Pull out known props and forward the rest (events, ARIA, etc.) to the native button
+	let allProps = $props();
 	let {
 		class: className = '',
 		type: btnType = 'button' as 'button' | 'submit' | 'reset',
 		disabled = false,
 		variant = 'default' as ButtonVariants['variant'],
 		size = 'default' as ButtonVariants['size'],
-		children
-	} = $props();
+		children,
+		...restProps
+	} = allProps;
 </script>
 
-<button class={cn(buttonVariants({ variant, size }), className)} type={btnType} disabled={disabled}>
+<button
+	class={cn(buttonVariants({ variant, size }), className)}
+	type={btnType}
+	disabled={disabled}
+	{...restProps}
+>
 	{@render children?.()}
 </button>

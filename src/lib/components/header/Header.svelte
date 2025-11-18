@@ -53,8 +53,9 @@
 
 		<!-- Mobile menu toggle -->
 		<div class="md:hidden">
-			<button
-				class="inline-flex h-9 w-9 items-center justify-center rounded-md border"
+			<Button
+				variant="outline"
+				size="icon"
 				aria-label={mobileOpen ? 'Close menu' : 'Open menu'}
 				onclick={() => (mobileOpen = !mobileOpen)}
 			>
@@ -63,7 +64,7 @@
 				{:else}
 					<Icon name="menu" />
 				{/if}
-			</button>
+			</Button>
 		</div>
 	</div>
 
