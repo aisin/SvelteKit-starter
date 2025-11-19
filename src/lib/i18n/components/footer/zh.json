@@ -1,0 +1,36 @@
+{
+  "brand": {
+    "description": "SvelteKit-starter 是一个用于构建 AI SaaS 项目的开发框架，内置丰富的功能模块和业务组件，开箱即用，帮助您快速启动网站。",
+    "social": {
+      "twitter": "https://twitter.com/shipany_ai",
+      "github": "https://github.com/shipany",
+      "mail": "mailto:contact@shipany.ai"
+    }
+  },
+  "navSections": [
+    {
+      "title": "产品",
+      "links": [
+        { "label": "功能", "href": "/#features" },
+        { "label": "案例", "href": "/showcases" },
+        { "label": "定价", "href": "/pricing" },
+        { "label": "文档", "href": "/docs" },
+        { "label": "区块", "href": "/blocks" },
+        { "label": "模板", "href": "/templates" }
+      ]
+    },
+    {
+      "title": "友情链接",
+      "links": [
+        { "label": "ThinkAny", "href": "#" },
+        { "label": "MCP.so", "href": "#" },
+        { "label": "CopyWeb", "href": "#" }
+      ]
+    }
+  ],
+  "legalLinks": [
+    { "label": "隐私政策", "href": "/privacy-policy" },
+    { "label": "服务条款", "href": "/terms-of-service" }
+  ],
+  "copyright": "© 2025 SvelteKit-starter. 保留所有权利。"
+}

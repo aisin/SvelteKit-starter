@@ -2,6 +2,7 @@
   export let data: { locale: string; messages: Record<string, any> };
   export let children: any;
   import Header from '$lib/components/header/Header.svelte';
+  import Footer from '$lib/components/Footer.svelte';
   import { setI18nContext } from '$lib/i18n/context';
 
   function get(obj: any, path: string) {
@@ -22,3 +23,4 @@
 
 <Header />
 {@render children()}
+<Footer data={data.messages.footer} />

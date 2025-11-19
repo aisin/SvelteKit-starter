@@ -17,13 +17,15 @@ async function loadMessages(locale: Supported) {
   const dashboard = (await import(`$lib/i18n/pages/dashboard/${locale}.json`)).default;
   const login = (await import(`$lib/i18n/pages/login/${locale}.json`)).default;
   const profile = (await import(`$lib/i18n/pages/profile/${locale}.json`)).default;
+  const footer = (await import(`$lib/i18n/components/footer/${locale}.json`)).default;
 
   return {
     header,
     home,
     dashboard,
     login,
-    profile
+    profile,
+    footer
   } satisfies Record<string, any>;
 }
 
