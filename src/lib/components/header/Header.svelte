@@ -17,7 +17,7 @@
 	let mobileOpen = $state(false);
 </script>
 
-<section id="header" class={cn('sticky top-0 z-40 w-full border-b bg-background/80 backdrop-blur', className)}>
+<section id="header" class={cn('sticky top-0 z-40 w-full border-b border-border bg-background/80 backdrop-blur dark:bg-background', className)}>
 	<div class="mx-auto flex max-w-screen-xl items-center justify-between px-4 py-3 md:px-6">
 		<!-- Left: logo -->
 		<div class="flex items-center gap-2">
