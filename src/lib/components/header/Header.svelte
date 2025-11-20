@@ -70,7 +70,7 @@
 
 	<!-- Mobile panel -->
 	{#if mobileOpen}
-		<div class="border-t bg-background md:hidden">
+		<div class="border-t border-border bg-background md:hidden">
 			<div class="mx-auto max-w-screen-xl px-4 py-3">
 				<nav class="grid gap-1">
 					{#each (t('header.nav.items') as unknown as any[] ?? []) as item}
