@@ -1,10 +1,14 @@
 <script lang="ts">
   import { page } from '$app/stores';
   import { goto } from '$app/navigation';
+  import Select from '$lib/components/ui/Select.svelte';
 
   const localeNames: Record<string, string> = { en: 'English', zh: '中文' };
   const SUPPORTED = ['en', 'zh'] as const;
   const DEFAULT = 'en';
+
+  const options = Object.entries(localeNames).map(([value, label]) => ({ value, label }));
+  const currentLocale = $derived((($page.params.lang as string | undefined) ?? DEFAULT).toLowerCase());
 
   function stripLeadingLocale(pathname: string) {
     return pathname.replace(/^\/(en|zh)(?=\/|$)/i, '') || '/';
@@ -23,8 +27,9 @@
   }
 </script>
 
-<select on:change={(e) => switchLocale((e.target as HTMLSelectElement).value)}>
-  {#each Object.keys(localeNames) as key}
-    <option value={key} selected={key === ($page.params.lang ?? DEFAULT)}>{localeNames[key]}</option>
-  {/each}
-</select>
+<Select
+  items={options}
+  value={currentLocale}
+  aria-label="Language selector"
+  onValueChange={switchLocale}
+/>
