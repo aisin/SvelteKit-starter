@@ -109,7 +109,7 @@
 	<button
 		type="button"
 		class={cn(
-			'flex h-9 min-w-36 items-center justify-between rounded-md border border-input bg-background px-3 py-2 text-sm text-foreground shadow-sm ring-offset-background transition focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-ring focus-visible:ring-offset-2 disabled:cursor-not-allowed disabled:opacity-50',
+			'flex h-9 min-w-[9rem] items-center justify-between rounded-md border border-input bg-background px-4 text-sm text-foreground shadow-sm ring-offset-background transition focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-ring focus-visible:ring-offset-2 disabled:cursor-not-allowed disabled:opacity-50',
 			!selectedOption && 'text-muted-foreground'
 		)}
 		aria-haspopup="listbox"
@@ -135,17 +135,17 @@
 
 	{#if open}
 		<div
-			class="absolute left-0 z-50 mt-1 w-full min-w-36 overflow-hidden rounded-md border bg-popover text-popover-foreground shadow-md"
+			class="absolute left-0 top-full z-50 mt-1 w-full min-w-[9rem] overflow-hidden rounded-md border border-input bg-popover text-popover-foreground shadow-md"
 			role="listbox"
 		>
-			<div class="max-h-56 overflow-y-auto p-1">
+			<div class="max-h-56 overflow-y-auto py-1">
 				{#each items as item, index (item.value)}
 					<button
 						type="button"
 						class={cn(
-							'relative flex w-full cursor-default select-none items-center rounded-sm px-2 py-1.5 text-sm outline-none transition-colors',
-							internalValue === item.value && 'bg-accent text-accent-foreground',
-							highlightedIndex === index && internalValue !== item.value && 'bg-accent/40 text-foreground',
+							'relative flex w-full cursor-default select-none items-center justify-between rounded-md px-4 py-1.5 text-sm outline-none transition-colors',
+							internalValue === item.value && 'font-medium',
+							highlightedIndex === index && 'bg-muted',
 							item.disabled && 'opacity-50 cursor-not-allowed'
 						)}
 						role="option"
@@ -154,6 +154,9 @@
 						on:mouseenter={() => (highlightedIndex = index)}
 					>
 						<span class="truncate">{item.label ?? item.value}</span>
+						{#if internalValue === item.value}
+							<Icon name="check" class="ml-3 h-4 w-4 text-foreground" size={16} />
+						{/if}
 					</button>
 				{/each}
 			</div>
