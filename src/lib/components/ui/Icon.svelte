@@ -22,4 +22,4 @@
 	const IconComp = map[name] ?? Menu;
 </script>
 
-<IconComp size={size} strokeWidth={strokeWidth} class={cn('h-5 w-5', className)} />
+<IconComp size={size} strokeWidth={strokeWidth} class={cn('h-5 w-5 text-foreground', className)} />
