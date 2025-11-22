@@ -11,5 +11,9 @@
     "github": {
       "label": "Continue with GitHub"
     }
+  },
+  "footer": {
+    "no_account": "Don't have an account?",
+    "sign_up": "Sign up"
   }
 }

@@ -11,5 +11,9 @@
     "github": {
       "label": "使用 GitHub 继续"
     }
+  },
+  "footer": {
+    "no_account": "还没有账号？",
+    "sign_up": "注册"
   }
 }
