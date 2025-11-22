@@ -96,3 +96,20 @@
 
 /* Tailwind v4 dark mode configuration - Must be after @theme */
 @variant dark (.dark &);
+
+/* Global pointer cursor for interactive buttons */
+@layer base {
+	button,
+	[type='button'],
+	[type='submit'],
+	[type='reset'] {
+		cursor: pointer;
+	}
+
+	button:disabled,
+	[type='button']:disabled,
+	[type='submit']:disabled,
+	[type='reset']:disabled {
+		cursor: default;
+	}
+}
