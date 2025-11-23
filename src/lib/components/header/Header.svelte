@@ -10,14 +10,33 @@
 	import { getI18nContext } from '$lib/i18n/context';
 	import { page } from '$app/stores';
 	import { cn } from '$lib/utils/cn';
+	import { onMount } from 'svelte';
 
 	let { class: className = '' } = $props();
 	const { t } = getI18nContext();
 	const locale = $derived((($page.params.lang as string | undefined) ?? 'en').toLowerCase());
 	let mobileOpen = $state(false);
+	let scrolled = $state(false);
+
+	onMount(() => {
+		const update = () => {
+			scrolled = typeof window !== 'undefined' && window.scrollY > 0;
+		};
+
+		update();
+		window.addEventListener('scroll', update, { passive: true });
+		return () => window.removeEventListener('scroll', update);
+	});
 </script>
 
-<section id="header" class={cn('sticky top-0 z-40 w-full border-b border-border bg-background/80 backdrop-blur dark:bg-background', className)}>
+<section
+	id="header"
+	class={cn(
+		'sticky top-0 z-40 w-full border-b border-border bg-background/80 backdrop-blur dark:bg-background transition-shadow',
+		scrolled && 'shadow-sm',
+		className
+	)}
+>
 	<div class="mx-auto flex max-w-screen-xl items-center justify-between px-4 py-3 md:px-6">
 		<!-- Left: logo -->
 		<div class="flex items-center gap-2">
