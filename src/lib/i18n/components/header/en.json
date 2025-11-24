@@ -20,15 +20,8 @@
       "title": "Sign in",
       "url": "/login",
       "target": "_self",
-      "variant": "ghost",
-      "icon": "log-in"
-    },
-    {
-      "title": "Get started",
-      "url": "/login",
-      "target": "_self",
       "variant": "default",
-      "icon": "rocket"
+      "icon": "log-in"
     }
   ],
   "show_sign": true,

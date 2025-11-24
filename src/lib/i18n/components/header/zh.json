@@ -20,15 +20,8 @@
       "title": "登录",
       "url": "/login",
       "target": "_self",
-      "variant": "ghost",
-      "icon": "log-in"
-    },
-    {
-      "title": "开始使用",
-      "url": "/login",
-      "target": "_self",
       "variant": "default",
-      "icon": "rocket"
+      "icon": "log-in"
     }
   ],
   "show_sign": true,

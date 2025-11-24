@@ -1,8 +1,8 @@
 <script lang="ts">
 	import { cn } from '$lib/utils/cn';
-	import { Menu, X, ChevronDown, Sun, Moon, Github, ExternalLink, Rocket, Check } from '@lucide/svelte';
+	import { Menu, X, ChevronDown, Sun, Moon, Github, ExternalLink, Rocket, Check, Languages } from '@lucide/svelte';
 	let {
-		name = 'menu' as 'menu' | 'x' | 'chevronDown' | 'sun' | 'moon' | 'github' | 'externalLink' | 'rocket' | 'check',
+		name = 'menu' as 'menu' | 'x' | 'chevronDown' | 'sun' | 'moon' | 'github' | 'externalLink' | 'rocket' | 'check' | 'languages',
 		size = 20,
 		strokeWidth = 2,
 		class: className = ''
@@ -17,7 +17,8 @@
 		github: Github,
 		externalLink: ExternalLink,
 		rocket: Rocket,
-		check: Check
+		check: Check,
+		languages: Languages
 	} as const;
 
 	const IconComp = map[name] ?? Menu;
