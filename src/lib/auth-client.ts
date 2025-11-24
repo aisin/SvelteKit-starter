@@ -7,4 +7,5 @@ export const signOut = async () => {
 	return data;
 };
 
-export const { useSession } = createAuthClient();
+// Reuse the same authClient instance for session hook
+export const { useSession } = authClient;

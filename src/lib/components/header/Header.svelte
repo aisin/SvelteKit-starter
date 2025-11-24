@@ -11,12 +11,17 @@
 	import { page } from '$app/stores';
 	import { cn } from '$lib/utils/cn';
 	import { onMount } from 'svelte';
+	import { useSession, signOut } from '$lib/auth-client';
 
 	let { class: className = '' } = $props();
 	const { t } = getI18nContext();
 	const locale = $derived((($page.params.lang as string | undefined) ?? 'en').toLowerCase());
+
+	const session = useSession();
 	let mobileOpen = $state(false);
 	let scrolled = $state(false);
+	let userMenuOpen = $state(false);
+	let userMenuRoot: HTMLDivElement | null = null;
 
 	onMount(() => {
 		const update = () => {
@@ -26,6 +31,19 @@
 		update();
 		window.addEventListener('scroll', update, { passive: true });
 		return () => window.removeEventListener('scroll', update);
+	});
+
+	$effect(() => {
+		if (!userMenuOpen || !userMenuRoot) return;
+
+		function handleClickOutside(event: MouseEvent) {
+			if (!userMenuRoot?.contains(event.target as Node)) {
+				userMenuOpen = false;
+			}
+		}
+
+		window.addEventListener('mousedown', handleClickOutside);
+		return () => window.removeEventListener('mousedown', handleClickOutside);
 	});
 </script>
 
@@ -62,11 +80,75 @@
 				<LocaleToggle />
 			{/if}
 			{#if t('header.show_sign')}
-				{#each (t('header.buttons') as unknown as any[] ?? []) as button}
-					<Link href={localeHref(button.url, locale)} target={button.target}>
-						<Button variant={button.variant}>{button.title}</Button>
-					</Link>
-				{/each}
+				{#if !$session.data?.user}
+					{#each (t('header.buttons') as unknown as any[] ?? []) as button}
+						<Link href={localeHref(button.url, locale)} target={button.target}>
+							<Button variant={button.variant}>{button.title}</Button>
+						</Link>
+					{/each}
+				{:else}
+					<div class="relative" bind:this={userMenuRoot}>
+						<button
+							type="button"
+							aria-label="User menu"
+							class="inline-flex h-9 w-9 items-center justify-center overflow-hidden rounded-md text-foreground transition-colors hover:bg-accent hover:text-accent-foreground focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-ring focus-visible:ring-offset-2"
+							onclick={() => (userMenuOpen = !userMenuOpen)}
+						>
+							{#if $session.data?.user?.image}
+								<img
+									src={$session.data.user.image}
+									alt={$session.data.user.name ?? 'User avatar'}
+									class="h-7 w-7 rounded-md object-cover"
+								/>
+							{:else}
+								<span class="text-sm font-medium">
+									{($session.data?.user?.name ?? 'U').slice(0, 1).toUpperCase()}
+								</span>
+							{/if}
+						</button>
+
+						{#if userMenuOpen}
+							<div
+								class="absolute right-0 top-full z-50 mt-2 w-40 overflow-hidden rounded-md border border-input bg-popover text-popover-foreground shadow-md"
+								role="menu"
+							>
+								<div class="py-1">
+									<button
+										type="button"
+										class="flex w-full items-center justify-between rounded-md px-3 py-1.5 text-sm outline-none transition-colors hover:bg-muted"
+										onclick={() => {
+											userMenuOpen = false;
+											window.location.href = localeHref('/profile', locale);
+										}}
+									>
+										<span class="truncate">{$session.data?.user?.name ?? t('header.userMenu.profile')}</span>
+									</button>
+									<button
+										type="button"
+										class="flex w-full items-center justify-between rounded-md px-3 py-1.5 text-sm outline-none transition-colors hover:bg-muted"
+										onclick={() => {
+											userMenuOpen = false;
+											window.location.href = localeHref('/dashboard', locale);
+										}}
+									>
+										<span>{t('header.userMenu.dashboard')}</span>
+									</button>
+									<button
+										type="button"
+										class="flex w-full items-center justify-between rounded-md px-3 py-1.5 text-sm outline-none text-destructive transition-colors hover:bg-muted"
+										onclick={async () => {
+											userMenuOpen = false;
+											await signOut();
+											window.location.href = localeHref('/login', locale);
+										}}
+									>
+										<span>{t('header.userMenu.signOut')}</span>
+									</button>
+								</div>
+							</div>
+						{/if}
+					</div>
+				{/if}
 			{/if}
 		</div>
 
@@ -105,11 +187,31 @@
 					</div>
 					<div class="mt-2 flex gap-2">
 						{#if t('header.show_sign')}
-							{#each (t('header.buttons') as unknown as any[] ?? []) as button}
-								<Link href={localeHref(button.url, locale)} class="flex-1" target={button.target}>
-									<Button variant={button.variant} class="w-full">{button.title}</Button>
-								</Link>
-							{/each}
+							{#if !$session.data?.user}
+								{#each (t('header.buttons') as unknown as any[] ?? []) as button}
+									<Link href={localeHref(button.url, locale)} class="flex-1" target={button.target}>
+										<Button variant={button.variant} class="w-full">{button.title}</Button>
+									</Link>
+								{/each}
+							{:else}
+								<button
+									type="button"
+									class="inline-flex h-9 w-9 items-center justify-center overflow-hidden rounded-md text-foreground transition-colors hover:bg-accent hover:text-accent-foreground focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-ring focus-visible:ring-offset-2"
+									onclick={() => (mobileOpen = false, window.location.href = localeHref('/dashboard', locale))}
+								>
+									{#if $session.data?.user?.image}
+										<img
+											src={$session.data.user.image}
+											alt={$session.data.user.name ?? 'User avatar'}
+											class="h-full w-full object-cover"
+										/>
+									{:else}
+										<span class="text-sm font-medium">
+											{($session.data?.user?.name ?? 'U').slice(0, 1).toUpperCase()}
+										</span>
+									{/if}
+								</button>
+							{/if}
 						{/if}
 					</div>
 				</nav>

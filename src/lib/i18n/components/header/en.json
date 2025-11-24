@@ -24,6 +24,11 @@
       "icon": "log-in"
     }
   ],
+  "userMenu": {
+    "profile": "Profile",
+    "dashboard": "Dashboard",
+    "signOut": "Sign out"
+  },
   "show_sign": true,
   "show_theme": true,
   "show_locale": true
